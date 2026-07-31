@@ -48,3 +48,19 @@ mksquashfs $DIRECTORY node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noa
 
 # exclude caches and other files example
 # sudo mksquashfs ./rootfs-cpy/ node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noappend -e boot proc sys dev run tmp mnt media lost+found
+
+
+
+# TODO: configure ssh server, set up slurm and below tooling to pick up hostname from DHCP:
+# /etc/systemd/network/20-dhcp.network
+# [Match]
+# Name=en* eth*  # Target your network interfaces
+
+# [Network]
+# DHCP=yes
+
+# [DHCPv4]
+# UseHostname=yes
+
+# and using chroot (https://stackoverflow.com/questions/51305706/shell-script-that-does-chroot-and-execute-commands-in-chroot)
+# systemctl enable systemd-networkd
