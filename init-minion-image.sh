@@ -42,3 +42,9 @@ path-exclude=/usr/share/doc/*
 path-exclude=/usr/share/locale/*
 path-exclude=/usr/share/man/*
 EOF
+
+# 7) make the rootfs into a squashfs
+mksquashfs $DIRECTORY node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noappend
+
+# exclude caches and other files example
+# sudo mksquashfs ./rootfs-cpy/ node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noappend -e boot proc sys dev run tmp mnt media lost+found
