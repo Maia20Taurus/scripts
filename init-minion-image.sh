@@ -50,8 +50,8 @@ mksquashfs $DIRECTORY node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noa
 # sudo mksquashfs ./rootfs-cpy/ node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noappend -e boot proc sys dev run tmp mnt media lost+found
 
 
-
 # TODO: configure ssh server, set up slurm and below tooling to pick up hostname from DHCP:
+cat "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKosjebuhxoxF7dHtO69Mnk598IpKSgQgAZSmkIrSKV4 mammoth-minions@excs" > ~/.ssh/authorized_keys
 # /etc/systemd/network/20-dhcp.network
 # [Match]
 # Name=en* eth*  # Target your network interfaces
@@ -62,5 +62,11 @@ mksquashfs $DIRECTORY node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noa
 # [DHCPv4]
 # UseHostname=yes
 
-# and using chroot (https://stackoverflow.com/questions/51305706/shell-script-that-does-chroot-and-execute-commands-in-chroot)
-# systemctl enable systemd-networkd
+
+# Source - https://stackoverflow.com/a/51312156
+# Posted by Ondrej K., modified by community. See post 'Timeline' for change history
+# Retrieved 2026-10-16, License - CC BY-SA 4.0
+#Everything between chroot and EOT will be run
+chroot $DIRECTORY /bin/bash <<"EOT"
+systemctl enable systemd-networkd
+EOT
