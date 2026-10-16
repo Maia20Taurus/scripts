@@ -51,7 +51,7 @@ mksquashfs $DIRECTORY node.squashfs -comp zstd -Xcompression-level 19 -b 1M -noa
 
 
 # TODO: configure ssh server, set up slurm and below tooling to pick up hostname from DHCP:
-cat "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKosjebuhxoxF7dHtO69Mnk598IpKSgQgAZSmkIrSKV4 mammoth-minions@excs" > ~/.ssh/authorized_keys
+cat "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKosjebuhxoxF7dHtO69Mnk598IpKSgQgAZSmkIrSKV4 mammoth-minions@excs" > $DIRECTORY/~/.ssh/authorized_keys
 # /etc/systemd/network/20-dhcp.network
 # [Match]
 # Name=en* eth*  # Target your network interfaces
